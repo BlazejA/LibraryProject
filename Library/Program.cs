@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<LibraryContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BooksDatabase")));
+builder.Services.AddDbContext<LibraryContext>(options => options.UseInMemoryDatabase("LibraryDatabase"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("BooksDatabase")));
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 
