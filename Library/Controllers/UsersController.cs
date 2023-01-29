@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
-    [Route("users")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
