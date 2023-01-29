@@ -22,8 +22,8 @@ namespace Library.Repository
             user.RentedBooks.Remove(book);
             book.User = null;
 
-            _context.Books.Entry(book).State = EntityState.Modified;
-            _context.Users.Entry(user).State = EntityState.Modified;
+            _context.Books.Update(book).State = EntityState.Modified;
+            _context.Users.Update(user).State = EntityState.Modified;
 
             _context.SaveChanges();
             return true;
@@ -38,8 +38,8 @@ namespace Library.Repository
             book.User = user;
             user.RentedBooks.Add(book);
 
-            _context.Books.Entry(book).State = EntityState.Modified;
-            _context.Users.Entry(user).State = EntityState.Modified;
+            _context.Books.Update(book).State = EntityState.Modified;
+            _context.Users.Update(user).State = EntityState.Modified;
 
             _context.SaveChanges();
             return true;

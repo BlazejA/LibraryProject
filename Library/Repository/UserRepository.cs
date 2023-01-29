@@ -37,7 +37,7 @@ public class UserRepository : IUserRepository
 
         existingUser.Email = user.Email;
         existingUser.Name = user.Name;
-        _context.Users.Entry(existingUser).State = EntityState.Modified;
+        _context.Users.Update(existingUser).State = EntityState.Modified;
         _context.SaveChanges();
     }
 

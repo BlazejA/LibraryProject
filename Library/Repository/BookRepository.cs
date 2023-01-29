@@ -31,7 +31,7 @@ public class BookRepository : IBookRepository
 
         existingBook.Author = book.Author;
         existingBook.Title = book.Title;
-        _context.Books.Entry(existingBook).State = EntityState.Modified;
+        _context.Books.Update(existingBook).State = EntityState.Modified;
         _context.SaveChanges();
     }
 
