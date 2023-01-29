@@ -1,0 +1,48 @@
+﻿using Library.Repository.Context;
+using Library.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace Library.Repository
+{
+    public class RentBookRepository : IRentBookRepository
+    {
+        private readonly LibraryContext _context;
+
+        public RentBookRepository(LibraryContext context)
+        {
+            _context = context;
+        }
+
+        public bool ReturnBook(int bookId, int userId)
+        {
+            var book = _context.Books.FirstOrDefault(x => x.Id == bookId);
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+            if (book == null || user == null || book.User != null) return false;
+
+            user.RentedBooks.Remove(book);
+            book.User = null;
+
+            _context.Books.Entry(book).State = EntityState.Modified;
+            _context.Users.Entry(user).State = EntityState.Modified;
+
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool RentBook(int bookId, int userId)
+        {
+            var book = _context.Books.FirstOrDefault(x => x.Id == bookId);
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+            if (book == null || user == null || book.User != null) return false;
+
+            book.User = user;
+            user.RentedBooks.Add(book);
+
+            _context.Books.Entry(book).State = EntityState.Modified;
+            _context.Users.Entry(user).State = EntityState.Modified;
+
+            _context.SaveChanges();
+            return true;
+        }
+    }
+}
