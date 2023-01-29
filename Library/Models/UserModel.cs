@@ -2,10 +2,10 @@
 {
     public class UserModel
     {
-        public int Id { get; set; }
+        internal int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public ICollection<BookModel> RentedBooks { get; set; }
+        public ICollection<BookModel>? RentedBooks { get; private set; }
 
     }
 }
